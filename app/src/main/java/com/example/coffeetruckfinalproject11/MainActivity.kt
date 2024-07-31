@@ -15,6 +15,16 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+
         }
+        displayTruckListView()
+
+    }
+    fun displayTruckListView() {
+        val listViewFragment = ListViewTrucks()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.flListViewFragment, listViewFragment)
+        transaction.addToBackStack("TAG")
+        transaction.commit()
     }
 }
