@@ -102,4 +102,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp" />
 
+    <FrameLayout
+        android:id="@+id/flAddCoffeeTruck"
+        android:layout_width="418dp"
+        android:layout_height="734dp"
+        tools:layout_editor_absoluteX="-8dp"
+        tools:layout_editor_absoluteY="-4dp">
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
