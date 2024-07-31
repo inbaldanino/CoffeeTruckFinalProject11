@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DisplayCoffeeTruck">
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="שם עגלת הקפה"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="מיקום"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewKosher"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="כשר/לא כשר"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewLocation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewOpeningHours"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="שעות פתיחה"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewKosher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewRecommendations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="המלצות"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewOpeningHours"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewTripSuggestions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="המלצות לטיול בקרבת העגלה"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewRecommendations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewReviews"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="ביקורות"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewTripSuggestions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
