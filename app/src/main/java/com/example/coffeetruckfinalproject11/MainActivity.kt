@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
-        addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
+        //val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
+        //addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
 
         if (savedInstanceState == null) {
             displayTruckListView()
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
     private fun displayTruckListView() {
         listViewFragment = ListViewTrucks()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.addNewCoffeeTruckButton, listViewFragment!!)
+            .replace(R.id.fcMainActivity, listViewFragment!!)
             .commit()
         addNewCoffeeTruckFragment = null
     }

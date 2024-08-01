@@ -10,7 +10,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coffeetruckfinalproject11.Model.Truck
-import com.example.coffeetruckfinalproject11.Model.Model
+import com.example.coffeetruckfinalproject11.model.Model
 
 class ListViewTrucks : Fragment() {
     var truckList : ListView?=null
@@ -45,16 +45,23 @@ class ListViewTrucks : Fragment() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            var view: View? = null
+            if (convertView == null) {
+                view = LayoutInflater.from(parent?.context)
+                    .inflate(R.layout.truck_row_view, parent, false)
+            /*val checkBox:CheckBox? = view?.findViewById(R.id.cbRowTruckCheckBox)
+            checkBox?.apply { setOnClickListener{
+                trucks?. = checkBox.isChecked
+            } }*/
+            }
             val truck = trucks?.get(position)
-            val view: View = convertView ?: LayoutInflater.from(parent?.context)
-                .inflate(R.layout.truck_row_view, parent, false)
-            val nameTextView: TextView = view.findViewById(R.id.tvRowTruckName)
-            val locationTextView: TextView = view.findViewById(R.id.tvRowTruckLocation)
-            val truckCheckBox : CheckBox = view.findViewById(R.id.cbRowTruckCheckBox)
+            val nameTextView: TextView? = view?.findViewById(R.id.tvRowTruckName)
+            val locationTextView: TextView? = view?.findViewById(R.id.tvRowTruckLocation)
+            val truckCheckBox : CheckBox? = view?.findViewById(R.id.cbRowTruckCheckBox)
 
-            nameTextView.text = truck?.name
-            locationTextView.text = truck?.location
-            truckCheckBox.isChecked = truck?.checkBox ?: false
+            nameTextView?.text = truck?.name
+            locationTextView?.text = truck?.location
+            truckCheckBox?.isChecked = truck?.checkBox ?: false
 
             return view!!
 

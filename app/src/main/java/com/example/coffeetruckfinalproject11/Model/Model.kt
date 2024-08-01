@@ -1,9 +1,18 @@
-package com.example.coffeetruckfinalproject11.Model
+package com.example.coffeetruckfinalproject11.model
 
-    class Model private constructor() {
-        val trucks: MutableList<Truck> = ArrayList()
+import com.example.coffeetruckfinalproject11.Model.Truck
 
-        companion object {
-            val instance: Model by lazy { Model() }
+class Model private constructor() {
+    val trucks: MutableList<Truck> = ArrayList()
+
+    companion object {
+        val instance: Model by lazy { Model() }
+    }
+
+    init {
+        for (i in 0..20) {
+            val truck = Truck("Name: $i", "Location: $i", false)
+            trucks.add(truck)
         }
     }
+}

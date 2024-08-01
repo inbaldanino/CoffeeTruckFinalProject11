@@ -7,33 +7,52 @@
 
     <TextView
         android:id="@+id/tvRowTruckName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="519dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="41dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cbRowTruckCheckBox"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/tvRowTruckLocation" />
 
     <TextView
         android:id="@+id/tvRowTruckLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="87dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="108dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tvRowTruckName"
+        app:layout_constraintEnd_toEndOf="@+id/tvRowTruckName"
+        app:layout_constraintStart_toStartOf="@+id/tvRowTruckName"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/cbRowTruckCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="75dp"
         android:text="CheckBox"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="60dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvRowTruckName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvRowTruckName"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="81dp"
-        android:layout_height="84dp"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="41dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="29dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRowTruckName"
+        app:layout_constraintEnd_toStartOf="@+id/tvRowTruckName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvRowTruckLocation"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 </androidx.constraintlayout.widget.ConstraintLayout>
