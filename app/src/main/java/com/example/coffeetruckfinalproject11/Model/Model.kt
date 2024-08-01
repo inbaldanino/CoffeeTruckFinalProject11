@@ -1,10 +1,9 @@
-package com.example.coffeetruckfinalproject11.Model;
+package com.example.coffeetruckfinalproject11.Model
 
-import java.lang.reflect.Array;
+    class Model private constructor() {
+        val trucks: MutableList<Truck> = ArrayList()
 
-/*class Model private constructor(){
-    val trucks: MutableList<Truck> =Array()
-    companion object{
-        val instance :Model = Model()
+        companion object {
+            val instance: Model by lazy { Model() }
+        }
     }
-}*/
