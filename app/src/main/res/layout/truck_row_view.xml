@@ -36,6 +36,7 @@
         android:layout_marginTop="87dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="75dp"
+        android:focusable="false"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="@+id/tvRowTruckName"
         app:layout_constraintEnd_toEndOf="parent"
