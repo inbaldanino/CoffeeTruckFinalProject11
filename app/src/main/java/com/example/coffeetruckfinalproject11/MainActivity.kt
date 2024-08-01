@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    //function for the addnewcoffeetruck frugment
+    //functions for the addnewcoffeetruck frugment
     private fun onAddNewCoffeeTruckClicked()
     {
         displayAddNewCoffeeTruckFragment()
@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    //functions for the listview
     private fun displayTruckListView() {
         listViewFragment = ListViewTrucks()
         supportFragmentManager.beginTransaction()
