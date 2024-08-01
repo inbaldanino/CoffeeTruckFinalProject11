@@ -15,18 +15,10 @@
         android:layout_marginTop="586dp"
         android:layout_marginEnd="86dp"
         android:layout_marginBottom="97dp"
-        android:text="Button"
+        android:text="הוסף עגלה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/flMainActivity"
-        android:layout_width="408dp"
-        android:layout_height="727dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
