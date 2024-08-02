@@ -2,6 +2,7 @@ package com.example.coffeetruckfinalproject11
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
@@ -74,6 +75,10 @@ class MainActivity : AppCompatActivity() {
 
         //val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
         //addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
+        val userProfileCreation = userProfileCreation ()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.fcMainActivity, userProfileCreation)
+        transaction.commit()
 
         if (savedInstanceState == null) {
             displayTruckListView()
@@ -82,6 +87,18 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun userProfileCreation(): Any {
+        val userProfileCreation = userProfileCreation ()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.fcMainActivity, userProfileCreation)
+        transaction.commit()
+    }
+
+    private fun FrameLayout(): Any {
+
+    }
+
     //functions for the addnewcoffeetruck fragment
     private fun onAddNewCoffeeTruckClicked()
     {
@@ -121,5 +138,9 @@ class MainActivity : AppCompatActivity() {
         addNewCoffeeTruckFragment = null
     }
 
+
+}
+
+private fun FragmentTransaction.add(fcMainActivity: Int, userProfileCreation: Any) {
 
 }
