@@ -82,21 +82,37 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    //functions for the addnewcoffeetruck frugment
+    //functions for the addnewcoffeetruck fragment
     private fun onAddNewCoffeeTruckClicked()
     {
-        displayAddNewCoffeeTruckFragment()
+        if (addNewCoffeeTruckFragment == null)
+            displayAddNewCoffeeTruckFragment()
+        else
+            removeAddNewCoffeeTruckFragment()
     }
     private fun displayAddNewCoffeeTruckFragment()
     {
-        val addNewCoffeeTruck = AddNewCoffeeTruck()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.flAddCoffeeTruck, addNewCoffeeTruck)
-        transaction.addToBackStack("Tag")
-        transaction.commit()
+        addNewCoffeeTruckFragment = AddNewCoffeeTruck()
+        addNewCoffeeTruckFragment?.let {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.flAddCoffeeTruck, it)
+            transaction.addToBackStack("Tag")
+            transaction.commit()
+        }
+    }
+    private fun removeAddNewCoffeeTruckFragment()
+    {
+        addNewCoffeeTruckFragment?.let {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.remove(it)
+            transaction.addToBackStack("Tag")
+            transaction.commit()
+        }
+        addNewCoffeeTruckFragment = null
     }
 
-    //functions for the listview
+
+    //functions for the listview fragment
     private fun displayTruckListView() {
         listViewFragment = ListViewTrucks()
         supportFragmentManager.beginTransaction()
