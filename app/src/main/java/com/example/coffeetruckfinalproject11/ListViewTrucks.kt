@@ -15,7 +15,7 @@ import com.example.coffeetruckfinalproject11.model.Model
 
 class ListViewTrucks : Fragment() {
     var truckList : ListView?=null
-    var trucks : MutableList<Truck> ?=null
+    var trucks: MutableList<Truck>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,14 +28,14 @@ class ListViewTrucks : Fragment() {
     //this is claude suggestions
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         // Initialize your views here
         trucks = Model.instance.trucks
         truckList = view.findViewById(R.id.lvTruckListView)
         truckList?.adapter = TruckListAdapter(trucks)
         truckList?.setOnItemClickListener {parent, view, position, id ->
-            Log.i("TAG", "Row was click at: $position")
-        }
+            truckList?.setOnItemClickListener { parent, view, position, id ->
+                Log.i("TAG", "Row was clicked at: $position")
+            }        }
     }
     class TruckListAdapter (val trucks: MutableList<Truck>?): BaseAdapter() {
         override fun getCount(): Int = trucks?.size ?: 0
@@ -44,38 +44,59 @@ class ListViewTrucks : Fragment() {
             return "TEST STRING"
         }
 
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
+        override fun getItemId(position: Int): Long = 0
+
 
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             // Use convertView if it's not null, otherwise inflate a new view
-            val view: View = convertView ?: LayoutInflater.from(parent?.context)
-                .inflate(R.layout.truck_row_view, parent, false)
 
             // Retrieve the Truck object for the current position
-            val truck = trucks?.get(position) ?: return view // Return early if truck is null
+            val truck = trucks?.get(position)
+            var view: View? = null
+            if (convertView == null) {
+                view = LayoutInflater.from(parent?.context).inflate(R.layout.truck_row_view, parent, false)
+                val truckCheckBox: CheckBox? = view?.findViewById(R.id.cbRowTruckCheckBox)
+                truckCheckBox?.setOnClickListener {
 
-            // Find views in the layout
-            val nameTextView: TextView = view.findViewById(R.id.tvRowTruckName)
-            val locationTextView: TextView = view.findViewById(R.id.tvRowTruckLocation)
-            val truckCheckBox: CheckBox = view.findViewById(R.id.cbRowTruckCheckBox)
+                    (truckCheckBox?.tag as? Int)?.let { tag ->
+                        var truck = trucks?.get(tag)
+                        truck?.checkBox = truckCheckBox?.isChecked ?: false
+                    }
+                }
+            }
+            view = view ?: convertView
 
-            // Set the text and checkbox state based on the Truck object
-            nameTextView.text = truck.name
-            locationTextView.text = truck.location
-            truckCheckBox.isChecked = truck.checkBox
+            val nameTextView: TextView? = view?.findViewById(R.id.tvRowTruckName)
+            val idTextView: TextView? = view?.findViewById(R.id.tvRowTruckLocation)
+            val truckCheckBox: CheckBox? = view?.findViewById(R.id.cbRowTruckCheckBox)
 
-            // Update the Truck object when the checkbox state changes
-            truckCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                truck.checkBox = isChecked
+            nameTextView?.text = truck?.name
+            idTextView?.text = truck?.location
+            truckCheckBox?.apply {
+                isChecked = truck?.checkBox ?: false
+                tag = position
             }
 
-            return view
+            return view!!
+            // Find views in the layout
+
+            // Update the Truck object when the checkbox state changes
+            /*truckCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                truck.checkBox = isChecked
+                Log.i("TAG", "checkbox clicked: $position")
+            }*/
+
         }
 
 
     }
+
+
 }
+
+
+
+
+
 
