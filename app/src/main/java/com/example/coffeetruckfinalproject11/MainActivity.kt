@@ -2,8 +2,10 @@ package com.example.coffeetruckfinalproject11
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 
 /*class MainActivity : AppCompatActivity() {
     private var listViewFragment: ListViewTrucks? = null
@@ -64,6 +66,7 @@ import androidx.appcompat.app.AppCompatActivity
 }*/
 
 class MainActivity : AppCompatActivity() {
+    private val coffeeTruckViewModel: CoffeeTruckViewModel by viewModels()
     private var listViewFragment: ListViewTrucks? = null
     private var addNewCoffeeTruckFragment: AddNewCoffeeTruck? = null
 
@@ -74,6 +77,10 @@ class MainActivity : AppCompatActivity() {
 
         //val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
         //addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
+        val userProfileCreation = userProfileCreation ()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.fcMainActivity, userProfileCreation)
+        transaction.commit()
 
         if (savedInstanceState == null) {
             displayTruckListView()
@@ -82,6 +89,18 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun userProfileCreation(): Any {
+        val userProfileCreation = userProfileCreation ()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.fcMainActivity, userProfileCreation)
+        transaction.commit()
+    }
+
+    private fun FrameLayout(): Any {
+
+    }
+
     //functions for the addnewcoffeetruck fragment
     private fun onAddNewCoffeeTruckClicked()
     {
@@ -96,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         addNewCoffeeTruckFragment?.let {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.add(R.id.flAddCoffeeTruck, it)
-            transaction.addToBackStack("Tag")
+            transaction.addToBackStack("addNewCoffeeTruck")
             transaction.commit()
         }
     }
@@ -121,5 +140,9 @@ class MainActivity : AppCompatActivity() {
         addNewCoffeeTruckFragment = null
     }
 
+
+}
+
+private fun FragmentTransaction.add(fcMainActivity: Int, userProfileCreation: Any) {
 
 }

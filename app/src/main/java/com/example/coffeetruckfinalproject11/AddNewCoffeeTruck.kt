@@ -8,10 +8,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import android.widget.EditText
 import android.widget.Button
+import androidx.lifecycle.ViewModel
+import androidx.fragment.app.activityViewModels
 
 
 class AddNewCoffeeTruck : Fragment()
 {
+    private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
+
     private lateinit var editTextName: EditText
     private lateinit var editTextLocation: EditText
     private lateinit var editTextKosher: EditText
@@ -46,7 +50,13 @@ class AddNewCoffeeTruck : Fragment()
             val recommendations = editTextRecommendations.text.toString()
             val tripSuggestions = editTextTripSuggestions.text.toString()
             val reviews = editTextReviews.text.toString()
+            val photoUri: String? = null
 
+            val coffeeTruck = CoffeeTruck(name, location, kosher, openingHours, photoUri, recommendations, tripSuggestions, reviews)
+            coffeeTruckViewModel.addCoffeeTruck(coffeeTruck)
+
+            // Close the fragment
+            parentFragmentManager.popBackStack()
             // Use the collected data (e.g., save to a database or send to an API)
         }
         return view
