@@ -26,4 +26,38 @@
         android:textSize="24sp"
         tools:layout_editor_absoluteX="131dp"
         tools:layout_editor_absoluteY="85dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="העגלה שלי"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="דף הבית"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="מועדפים"
+        android:textAlignment="center"
+        android:textAppearance="Ass"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:rippleColor="#009688"
+        tools:layout_editor_absoluteX="244dp"
+        tools:layout_editor_absoluteY="592dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
