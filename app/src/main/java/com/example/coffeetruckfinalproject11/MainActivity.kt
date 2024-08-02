@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 
 /*class MainActivity : AppCompatActivity() {
     private var listViewFragment: ListViewTrucks? = null
@@ -64,6 +65,7 @@ import androidx.appcompat.app.AppCompatActivity
 }*/
 
 class MainActivity : AppCompatActivity() {
+    private val coffeeTruckViewModel: CoffeeTruckViewModel by viewModels()
     private var listViewFragment: ListViewTrucks? = null
     private var addNewCoffeeTruckFragment: AddNewCoffeeTruck? = null
 
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         addNewCoffeeTruckFragment?.let {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.add(R.id.flAddCoffeeTruck, it)
-            transaction.addToBackStack("Tag")
+            transaction.addToBackStack("addNewCoffeeTruck")
             transaction.commit()
         }
     }

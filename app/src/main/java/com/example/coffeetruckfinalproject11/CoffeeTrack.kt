@@ -1,6 +1,5 @@
 package com.example.coffeetruckfinalproject11
 
-import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -9,7 +8,7 @@ data class CoffeeTruck(
     val location: String,
     val kosher: String,
     val openingHours: String,
-    val photos: Bitmap?,
+    val photoUri: String?, // Use a URI or path for the image
     val recommendations: String,
     val tripSuggestions: String,
     val reviews: String
@@ -19,7 +18,7 @@ data class CoffeeTruck(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readParcelable(Bitmap::class.java.classLoader),
+        parcel.readString(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!
@@ -30,7 +29,7 @@ data class CoffeeTruck(
         parcel.writeString(location)
         parcel.writeString(kosher)
         parcel.writeString(openingHours)
-        parcel.writeParcelable(photos, flags)
+        parcel.writeString(photoUri)
         parcel.writeString(recommendations)
         parcel.writeString(tripSuggestions)
         parcel.writeString(reviews)
