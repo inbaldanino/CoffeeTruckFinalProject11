@@ -22,6 +22,16 @@
         android:layout_height="447dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="31dp" />
+        tools:layout_editor_absoluteY="193dp" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcUserProfileCeation"
+        android:name="com.example.coffeetruckfinalproject11.UserProfileCreation"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
