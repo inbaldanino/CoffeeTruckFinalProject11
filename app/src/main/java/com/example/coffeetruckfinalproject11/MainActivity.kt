@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
+import androidx.fragment.app.FragmentTransaction
 import com.example.coffeetruckfinalproject11.Module.Truck.ListViewTrucks
 
 /*class MainActivity : AppCompatActivity() {
@@ -94,10 +95,12 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fcMainActivity, userProfileCreation)
         transaction.commit()
+        return TODO("Provide the return value")
     }
 
     private fun FrameLayout(): Any {
 
+        return TODO("Provide the return value")
     }
 
     //functions for the addnewcoffeetruck fragment
