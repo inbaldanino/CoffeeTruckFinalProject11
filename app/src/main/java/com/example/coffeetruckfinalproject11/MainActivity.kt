@@ -1,6 +1,8 @@
 package com.example.coffeetruckfinalproject11
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
@@ -70,6 +72,12 @@ class MainActivity : AppCompatActivity() {
     private var listViewFragment: ListViewTrucks? = null
     private var addNewCoffeeTruckFragment: AddNewCoffeeTruck? = null
 
+    val addProfileCreationButton:Button= findViewById(R.id.btnCreateNewProfile)
+    class ButtonOnClickListener:View.OnClickListener{
+        override fun onClick(v: View?) {
+            TODO("Not yet implemented")
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -87,7 +95,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+        val listener = ButtonOnClickListener()
+        addProfileCreationButton.setOnClickListener(listener)
     }
 
     private fun userProfileCreation(): Any {
