@@ -1,22 +1,17 @@
-package com.example.coffeetruckfinalproject11
+package com.example.coffeetruckfinalproject11.Module.Truck
 
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeetruckfinalproject11.Model.Truck
-import com.example.coffeetruckfinalproject11.model.Model
-import com.example.coffeetruckfinalproject11.model.TrucksRecycleViewAdapter
+import com.example.coffeetruckfinalproject11.R
+import com.example.coffeetruckfinalproject11.Model.Model
 
 
-class RecycleViewTruck : Fragment() {
+/*class RecycleViewTruck : Fragment() {
 
     var truckRecycleView : RecyclerView?=null
     var trucks : MutableList<Truck> ?=null
@@ -52,17 +47,17 @@ class RecycleViewTruck : Fragment() {
         fun onTruckClicked(truck: Truck?)
     }
 
-    /*override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recycle__view, container, false)
-    }*/
+    }
 
 
 
-    /*inner class TruckViewHolder(val itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class TruckViewHolder(val itemView: View):RecyclerView.ViewHolder(itemView){
 
 
         var nameTextView: TextView? = null
@@ -90,12 +85,12 @@ class RecycleViewTruck : Fragment() {
 
             }
         }
-    }*/
+    }
 
 
 
 
-    /*inner class TrucksRecycleViewAdapter: RecyclerView.Adapter<TruckViewHolder>()
+    inner class TrucksRecycleViewAdapter: RecyclerView.Adapter<TruckViewHolder>()
     {
 
         var listener: OnItemClickListener? = null
@@ -115,7 +110,7 @@ class RecycleViewTruck : Fragment() {
 
 
 
-            /*holder.locationTextView?.text = truck.location
+            holder.locationTextView?.text = truck.location
             holder.truckCheckBox?.isChecked = truck.checkBox
             holder.truckCheckBox?.tag = position
             holder.truckCheckBox?.setOnClickListener{
@@ -123,17 +118,17 @@ class RecycleViewTruck : Fragment() {
                     var truck = trucks?.get(tag)
                     truck?.checkBox = holder.truckCheckBox?.isChecked ?:false
                 }
-            }*/
+            }
 
            // Set the text and checkbox state based on the Truck object
 
         }
-    }*/
+    }
 }
 
 
 
-/*var view: View ?= null
+var view: View ?= null
 if (convertView == null) {
     view =
     val truckCheckBox: CheckBox? = view.findViewById(R.id.cbRowTruckCheckBox)
@@ -146,4 +141,35 @@ truckCheckBox?.setOnClickListener{
     }
 }*/
 
+class RecycleViewTruck : Fragment() {
+    private var truckRecycleView: RecyclerView? = null
+    private var trucks: MutableList<Truck>? = null
+    private lateinit var adapter: TrucksRecycleViewAdapter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_recycle__view, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        trucks = Model.instance.trucks
+        truckRecycleView = view.findViewById(R.id.rvTruckRecycleView)
+        truckRecycleView?.layoutManager = LinearLayoutManager(context)
+
+        adapter = TrucksRecycleViewAdapter(trucks)
+        truckRecycleView?.adapter = adapter
+
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                Log.i("TAG", "Position clicked $position")
+            }
+            override fun onTruckClicked(truck: Truck?) {
+                Log.i("TAG", "TRUCK $truck")
+            }
+        })
+    }
+
+    // Implement ViewHolder and Adapter classes here
+}
 

@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.model
+package com.example.coffeetruckfinalproject11.Model
 
 import com.example.coffeetruckfinalproject11.Model.Truck
 

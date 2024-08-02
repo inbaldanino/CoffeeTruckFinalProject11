@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11
+package com.example.coffeetruckfinalproject11.Module.Truck
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,8 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coffeetruckfinalproject11.Model.Truck
-import com.example.coffeetruckfinalproject11.model.Model
+import com.example.coffeetruckfinalproject11.R
+import com.example.coffeetruckfinalproject11.Model.Model
 
 class ListViewTrucks : Fragment() {
     var truckList : ListView?=null
@@ -31,29 +32,26 @@ class ListViewTrucks : Fragment() {
         // Initialize your views here
         trucks = Model.instance.trucks
         truckList = view.findViewById(R.id.lvTruckListView)
-        truckList?.adapter = TruckListAdapter(trucks)
+        truckList?.adapter = trucks?.let { TruckListAdapter(it) }  // Using safe call
+        //truckList?.adapter = TruckListAdapter(trucks)
         truckList?.setOnItemClickListener {parent, view, position, id ->
-            truckList?.setOnItemClickListener { parent, view, position, id ->
                 Log.i("TAG", "Row was clicked at: $position")
-            }        }
+        }
     }
+
+    //Adapter
     class TruckListAdapter (val trucks: MutableList<Truck>?): BaseAdapter() {
         override fun getCount(): Int = trucks?.size ?: 0
 
-        override fun getItem(position: Int): Any {
-            return "TEST STRING"
-        }
+        override fun getItem(position: Int): Any? = trucks?.get(position)
 
-        override fun getItemId(position: Int): Long = 0
-
+        override fun getItemId(position: Int): Long = position.toLong()
 
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            // Use convertView if it's not null, otherwise inflate a new view
-
-            // Retrieve the Truck object for the current position
             val truck = trucks?.get(position)
             var view: View? = null
+
             if (convertView == null) {
                 view = LayoutInflater.from(parent?.context).inflate(R.layout.truck_row_view, parent, false)
                 val truckCheckBox: CheckBox? = view?.findViewById(R.id.cbRowTruckCheckBox)
@@ -79,14 +77,6 @@ class ListViewTrucks : Fragment() {
             }
 
             return view!!
-            // Find views in the layout
-
-            // Update the Truck object when the checkbox state changes
-            /*truckCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                truck.checkBox = isChecked
-                Log.i("TAG", "checkbox clicked: $position")
-            }*/
-
         }
 
 
