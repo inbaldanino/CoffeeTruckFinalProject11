@@ -22,15 +22,15 @@ class UserProfileCreation : Fragment() {
             val nameTextField:EditText = findViewById(R.id.etAddNameUser)
             val idTextField:EditText = findViewById(R.id.etAddIdUser)
 
-
-
+            return TODO("Provide the return value")
         }
 
     private fun findViewById(etAddNameUser: Any): EditText {
 
+        return TODO("Provide the return value")
     }
 
-}
+   }
 
 
 
