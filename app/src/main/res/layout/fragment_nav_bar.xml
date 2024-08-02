@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NavBar"/>
+    tools:context=".NavBar">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.coffeetruckfinalproject11.NavBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="567dp"
+        android:layout_marginTop="703dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="85dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="העגלה שלי"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="דף הבית"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="מועדפים"
+        android:textAlignment="center"
+        android:textAppearance="Ass"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:rippleColor="#009688"
+        tools:layout_editor_absoluteX="244dp"
+        tools:layout_editor_absoluteY="592dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
