@@ -72,10 +72,8 @@ class MainActivity : AppCompatActivity() {
     private var listViewFragment: ListViewTrucks? = null
     private var addNewCoffeeTruckFragment: AddNewCoffeeTruck? = null
 
-    val addProfileCreationButton:Button= findViewById(R.id.btnCreateNewProfile)
     class ButtonOnClickListener:View.OnClickListener{
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,16 +85,24 @@ class MainActivity : AppCompatActivity() {
         //addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
         val userProfileCreation = userProfileCreation ()
         val transaction = supportFragmentManager.beginTransaction()
+        val addProfileCreationButton:Button= findViewById(R.id.btnCreateNewProfile)
+        addProfileCreationButton.setOnClickListener(::onAddTruckButtonClicked)
         transaction.add(R.id.fcMainActivity, userProfileCreation)
         transaction.commit()
 
         if (savedInstanceState == null) {
             displayTruckListView()
         }
-
-
         val listener = ButtonOnClickListener()
         addProfileCreationButton.setOnClickListener(listener)
+    }
+
+    fun onAddTruckButtonClicked(view:View)
+    {
+        if (addNewCoffeeTruckFragment == null)
+            displayAddNewCoffeeTruckFragment()
+        else
+            removeAddNewCoffeeTruckFragment()
     }
 
     private fun userProfileCreation(): Any {
@@ -113,13 +119,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //functions for the addnewcoffeetruck fragment
-    private fun onAddNewCoffeeTruckClicked()
+    private fun onAddNewCoffeeTruckClicked(view: View)
     {
         if (addNewCoffeeTruckFragment == null)
             displayAddNewCoffeeTruckFragment()
         else
             removeAddNewCoffeeTruckFragment()
     }
+
     private fun displayAddNewCoffeeTruckFragment()
     {
         addNewCoffeeTruckFragment = AddNewCoffeeTruck()

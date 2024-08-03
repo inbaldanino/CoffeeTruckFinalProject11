@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import android.widget.EditText
 import android.widget.Button
 import androidx.lifecycle.ViewModel
-import androidx.fragment.app.activityViewModels
+//import androidx.fragment.app.activityViewModels
 
 
 class AddNewCoffeeTruck : Fragment()
 {
-    private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
+   // private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
 
     private lateinit var editTextName: EditText
     private lateinit var editTextLocation: EditText
@@ -53,7 +53,7 @@ class AddNewCoffeeTruck : Fragment()
             val photoUri: String? = null
 
             val coffeeTruck = CoffeeTruck(name, location, kosher, openingHours, photoUri, recommendations, tripSuggestions, reviews)
-            coffeeTruckViewModel.addCoffeeTruck(coffeeTruck)
+            //coffeeTruckViewModel.addCoffeeTruck(coffeeTruck)
 
             // Close the fragment
             parentFragmentManager.popBackStack()

@@ -18,12 +18,21 @@ class ListViewTrucks : Fragment() {
     var truckList : ListView?=null
     var trucks: MutableList<Truck>? = null
 
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ListViewTrucks()
+    }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_view_trucks, container, false)
+        val view = inflater.inflate(R.layout.fragment_list_view_trucks, container, false)
+        return view
     }
 
     //this is claude suggestions
@@ -74,14 +83,9 @@ class ListViewTrucks : Fragment() {
                 isChecked = truck?.checkBox ?: false
                 tag = position
             }
-
             return view!!
         }
-
-
     }
-
-
 }
 
 
