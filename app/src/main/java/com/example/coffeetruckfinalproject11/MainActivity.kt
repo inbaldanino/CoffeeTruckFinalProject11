@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
-import com.example.coffeetruckfinalproject11.Module.Truck.ListViewTrucks
+import com.example.coffeetruckfinalproject11.Modules.Trucks.ListViewTrucks
 
 /*class MainActivity : AppCompatActivity() {
     private var listViewFragment: ListViewTrucks? = null
@@ -151,6 +151,7 @@ class MainActivity : AppCompatActivity() {
 
     //functions for the listview fragment
     private fun displayTruckListView() {
+        //listViewFragment = ListViewTruck.newInstance("Another try")
         listViewFragment = ListViewTrucks()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcMainActivity, listViewFragment!!)

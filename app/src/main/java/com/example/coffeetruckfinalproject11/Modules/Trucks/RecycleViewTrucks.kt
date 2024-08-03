@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Module.Truck
+package com.example.coffeetruckfinalproject11.Modules.Trucks
 
 import android.os.Bundle
 import android.util.Log
@@ -32,7 +32,7 @@ class RecycleViewTrucks : Fragment() {
         //adapter set
         //truckRecycleView?.adapter = TrucksRecycleAdapter()
         val adapter = TrucksRecycleAdapter()
-        adapter.listener = object : OnItemClickListener{
+        adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.i("TAG", "TrucksRecycleViewAdapter: Position clicked $position")
             }
@@ -58,7 +58,7 @@ class RecycleViewTrucks : Fragment() {
         fun onTruckClicked(truck: Truck?)
     }
 
-    inner class TruckViewHolder(val itemView: View, val listener:OnItemClickListener?):RecyclerView.ViewHolder(itemView){
+    inner class TruckViewHolder(val itemView: View, val listener: OnItemClickListener?):RecyclerView.ViewHolder(itemView){
 
 
         var nameTextView: TextView? = null
