@@ -1,6 +1,7 @@
 package com.example.coffeetruckfinalproject11.Module.Truck
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,19 @@ class RecycleViewTrucks : Fragment() {
 
         //layout manager
         truckRecycleView?.layoutManager = LinearLayoutManager(this)
-        truckRecycleView?.adapter = TrucksRecycleAdapter()
+        //adapter set
+        //truckRecycleView?.adapter = TrucksRecycleAdapter()
+        val adapter = TrucksRecycleAdapter()
+        adapter.listener = object : OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                Log.i("TAG", "TrucksRecycleViewAdapter: Position clicked $position")
+            }
+
+            override fun onTruckClicked(truck: Truck?) {
+            Log.i("TAG", "Truck $truck")
+            }
+        }
+        truckRecycleView?.adapter = adapter
     }
 
     override fun onCreateView(
@@ -38,49 +51,64 @@ class RecycleViewTrucks : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recycle_view_trucks, container, false)
     }
-    inner class TruckViewHolder(val itemView: View):RecyclerView.ViewHolder(itemView){
 
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+        fun onTruckClicked(truck: Truck?)
+    }
+
+    inner class TruckViewHolder(val itemView: View, val listener:OnItemClickListener?):RecyclerView.ViewHolder(itemView){
 
 
         var nameTextView: TextView? = null
         var idTextView: TextView? = null
         var truckCheckBox: CheckBox? = null
+        var truck: Truck? = null
 
         init {
              nameTextView = itemView.findViewById(R.id.tvRowTruckName)
              idTextView = itemView.findViewById(R.id.tvRowTruckLocation)
              truckCheckBox = itemView.findViewById(R.id.cbRowTruckCheckBox)
             truckCheckBox?.setOnClickListener {
+                var truck = trucks?.get(adapterPosition)
+                truck?.checkBox = truckCheckBox?.isChecked ?: false
 
-                (truckCheckBox?.tag as? Int)?.let { tag ->
-                    var truck = trucks?.get(tag)
-                    truck?.checkBox = truckCheckBox?.isChecked ?: false
-                }
+
+            }
+            itemView.setOnClickListener{
+                Log.i("TAG", "TruckViewHolder: Position clicked $adapterPosition")
+
+                listener?.OnitemClick(adapterPosition)
+                listener?.onTruckClicked(truck)
             }
         }
 
-        fun bind (truck: Truck?, position: Int)
+        fun bind (truck: Truck?)
         {
+            this.truck = truck
             nameTextView?.text = truck?.name
             idTextView?.text = truck?.location
             truckCheckBox?.apply {
                 isChecked = truck?.checkBox ?: false
-                tag = position
             }
         }
 
     }
     inner class TrucksRecycleAdapter : RecyclerView.Adapter<TruckViewHolder>()
         {
+            var listener : OnItemClickListener? = null
+
             override fun getItemCount(): Int = trucks?.size ?: 0
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TruckViewHolder {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.truck_row_view, parent, false)
-                return TruckViewHolder(itemView)
-                }
+                return TruckViewHolder(itemView, listener)
 
-            override fun onBindViewHolder(holder: TruckViewHolder, position: Int) {
-                val truck = trucks?.get(position)
-                holder.bind(truck, position)
             }
+
+        override fun onBindViewHolder(holder: TruckViewHolder, position: Int) {
+            val truck = trucks?.get(position)
+            holder.bind(truck)
         }
+    }
 }
