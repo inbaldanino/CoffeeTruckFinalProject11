@@ -20,12 +20,14 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="85dp"
         android:background="#009688"
         android:gravity="center_horizontal"
         android:text="TextView"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="85dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button1"
@@ -34,30 +36,32 @@
         android:background="#009688"
         android:text="העגלה שלי"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="592dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="91dp"
         android:background="#009688"
         android:text="דף הבית"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="592dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button1" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
         android:background="#009688"
         android:text="מועדפים"
         android:textAlignment="center"
-        android:textAppearance="Ass"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:rippleColor="#009688"
-        tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="592dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:rippleColor="#009688" />
 </androidx.constraintlayout.widget.ConstraintLayout>
