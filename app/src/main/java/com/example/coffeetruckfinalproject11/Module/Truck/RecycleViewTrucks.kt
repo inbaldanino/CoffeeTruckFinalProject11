@@ -28,7 +28,7 @@ class RecycleViewTrucks : Fragment() {
         truckRecycleView?.setHasFixedSize(true)
 
         //layout manager
-        truckRecycleView?.layoutManager = LinearLayoutManager(this)
+        truckRecycleView?.layoutManager = LinearLayoutManager(/*by claude & GPT, instead of this*/context)
         //adapter set
         //truckRecycleView?.adapter = TrucksRecycleAdapter()
         val adapter = TrucksRecycleAdapter()
@@ -79,7 +79,7 @@ class RecycleViewTrucks : Fragment() {
             itemView.setOnClickListener{
                 Log.i("TAG", "TruckViewHolder: Position clicked $adapterPosition")
 
-                listener?.OnitemClick(adapterPosition)
+                listener?.onItemClick(adapterPosition)
                 listener?.onTruckClicked(truck)
             }
         }
