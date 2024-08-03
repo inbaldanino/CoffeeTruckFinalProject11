@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/flTruckRecycleView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Module.Truck.RecycleViewTruck">
+    tools:context=".Module.Truck.RecycleViewTrucks">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTruckRecycleView"
-        android:layout_width="76dp"
-        android:layout_height="wrap_content" />
+        android:id="@+id/rvRecycleViewTrucks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

@@ -51,7 +51,6 @@ class ListViewTrucks : Fragment() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val truck = trucks?.get(position)
             var view: View? = null
-
             if (convertView == null) {
                 view = LayoutInflater.from(parent?.context).inflate(R.layout.truck_row_view, parent, false)
                 val truckCheckBox: CheckBox? = view?.findViewById(R.id.cbRowTruckCheckBox)
