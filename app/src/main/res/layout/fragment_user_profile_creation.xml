@@ -82,7 +82,7 @@
         app:layout_constraintStart_toEndOf="@+id/tvAddIdUser" />
 
     <Button
-        android:id="@+id/btnCancleProfile"
+        android:id="@+id/cancelButton"
         android:layout_width="171dp"
         android:layout_height="0dp"
         android:layout_marginBottom="34dp"
@@ -91,20 +91,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSaveProfile"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/btnSaveProfile"
+        android:id="@+id/saveButton"
         android:layout_width="163dp"
         android:layout_height="0dp"
         android:backgroundTint="#009688"
         android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCancleProfile"
-        app:layout_constraintEnd_toStartOf="@+id/btnCancleProfile"
+        app:layout_constraintBottom_toBottomOf="@+id/cancelButton"
+        app:layout_constraintEnd_toStartOf="@+id/cancelButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnCancleProfile" />
+        app:layout_constraintTop_toTopOf="@+id/cancelButton" />
 
     <TextView
         android:id="@+id/tvAddNameUser"
@@ -126,7 +126,7 @@
         android:layout_marginStart="51dp"
         android:layout_marginBottom="79dp"
         android:text="@string/textview"
-        app:layout_constraintBottom_toTopOf="@+id/btnCancleProfile"
+        app:layout_constraintBottom_toTopOf="@+id/cancelButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddIdUser" />
 
