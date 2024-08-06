@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModel
 
 class AddNewCoffeeTruck : Fragment()
 {
-   // private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
+    // private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
 
     private lateinit var editTextName: EditText
     private lateinit var editTextLocation: EditText
@@ -24,7 +24,7 @@ class AddNewCoffeeTruck : Fragment()
     private lateinit var editTextTripSuggestions: EditText
     private lateinit var editTextReviews: EditText
     private lateinit var buttonSubmit: Button
-  //
+    //
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
