@@ -2,37 +2,50 @@ package com.example.coffeetruckfinalproject11
 
 
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-
+import android.provider.MediaStore
 import android.view.LayoutInflater
-
 import android.view.View
-
 import android.view.ViewGroup
-
 import android.widget.Button
-
-import android.widget.EditText
-
-import android.widget.TextView
-
+import android.widget.ImageView
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-
+import com.google.android.material.textfield.TextInputEditText
+import java.net.URI
 
 
 class UserProfileCreation : Fragment() {
 
-    private var nameTextField: EditText? = null
+    private var nameET: TextInputEditText? = null
 
-    private var idTextField: EditText? = null
+    private var emailET: TextInputEditText? = null
 
-    private var messageField: TextView? = null
+    private var passwordET: TextInputEditText? = null
 
     private var saveButton: Button? = null
+    private var cameraBT: Button? = null
 
-    private var cancelButton: Button? = null
 
 
+    private var image: ImageView? = null
+
+    private var uri: Uri?= null
+
+
+    var startCamera: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(), { result ->
+            if (result.resultCode === RESULT_OK) {
+                uri = result.data?.data
+                image?.setImageURI(uri)
+            }
+        }
+    )
 
     override fun onCreateView(
 
@@ -44,7 +57,7 @@ class UserProfileCreation : Fragment() {
 
         // Inflate the layout for this fragment
 
-        val view = inflater.inflate(R.layout.fragment_user_profile_creation, container, false)
+        val view = inflater.inflate(R.layout.create_user, container, false)
 
         setupUI(view)
 
@@ -56,32 +69,24 @@ class UserProfileCreation : Fragment() {
 
     private fun setupUI(view: View) {
 
-        nameTextField = view.findViewById(R.id.etAddNameUser)
+        nameET = view.findViewById(R.id.etAddNameUser)
 
-        idTextField = view.findViewById(R.id.etAddIdUser)
+        passwordET = view.findViewById(R.id.etAddIdUser)
 
-        messageField = view.findViewById(R.id.textView4)
+       //לבדוק איך מכניסים בעיצוב emailET = view.findViewById(R.id.email)
 
         saveButton = view.findViewById(R.id.saveButton)
 
-        cancelButton = view.findViewById(R.id.cancelButton)
+            // לבדוק ריך מכניסים בעיצוב cameraBT =  view.findViewById(R.id.camera)
 
+        image = view.findViewById(R.id.imageView2)
 
+        cameraBT?.setOnClickListener { v -> openCamera() }
+    }
 
-        cancelButton?.setOnClickListener {
-
-            activity?.finish()
-
-        }
-
-        saveButton?.setOnClickListener {
-
-            val name = nameTextField?.text.toString()
-
-            messageField?.text = name
-
-        }
-
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startCamera.launch(intent);
     }
 
 }

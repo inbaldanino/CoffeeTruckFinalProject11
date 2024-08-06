@@ -6,66 +6,11 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.coffeetruckfinalproject11.Modules.Trucks.ListViewTrucks
-
-/*class MainActivity : AppCompatActivity() {
-    private var listViewFragment: ListViewTrucks? = null
-    private var addNewCoffeeTruckFragment: AddNewCoffeeTruck? = null
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-
-        val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
-        addNewCoffeeTruckButton.setOnClickListener(::onAddNewCoffeeTruckClicked)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        displayTruckListView()
-
-    }
-    private fun onAddNewCoffeeTruckClicked(view: View)
-    {
-        if (addNewCoffeeTruckFragment == null) {
-            displayAddNewCoffeeTruckFragment()
-        } else {
-            removeAddNewCoffeeTruckFragment()
-        }
-    }
-
-    private fun displayTruckListView() {
-        if (listViewFragment == null) {
-            listViewFragment = ListViewTrucks()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.flListViewFragment, listViewFragment!!)
-                .commit()
-        }
-    }
-
-    private fun displayAddNewCoffeeTruckFragment() {
-        if (addNewCoffeeTruckFragment == null) {
-            addNewCoffeeTruckFragment = AddNewCoffeeTruck()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.flAddCoffeeTruck, addNewCoffeeTruckFragment!!)
-                .addToBackStack(null)
-                .commit()
-        }
-    }
-
-    private fun removeAddNewCoffeeTruckFragment() {
-        addNewCoffeeTruckFragment?.let {
-            supportFragmentManager.beginTransaction()
-                .remove(it)
-                .commit()
-            addNewCoffeeTruckFragment = null
-        }
-    }
-}*/
+import com.example.coffeetruckfinalproject11.Modules.Trucks.RecycleViewTrucks
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private val coffeeTruckViewModel: CoffeeTruckViewModel by viewModels()
@@ -78,23 +23,33 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
 
-        //val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
-        //addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
-        val userProfileCreation = userProfileCreation ()
-        val transaction = supportFragmentManager.beginTransaction()
-        val addProfileCreationButton:Button= findViewById(R.id.btnCreateNewProfile)
-        addProfileCreationButton.setOnClickListener(::onAddTruckButtonClicked)
-        transaction.add(R.id.fcMainActivity, userProfileCreation)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, RecycleViewTrucks())
+            .commit()
+
+        val  navigation = findViewById<BottomNavigationView>(R.id.navigation);
+        navigation.setOnItemSelectedListener { item ->
+            var fragment : Fragment?= null
+            fragment =  when(item.itemId) {
+                R.id.home -> RecycleViewTrucks()
+                else -> null
+            }
+            fragment?.let {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, it)
+                    .commit()
+            }
+
+            true
+        }
+
 
         if (savedInstanceState == null) {
             displayTruckListView()
         }
         val listener = ButtonOnClickListener()
-        addProfileCreationButton.setOnClickListener(listener)
     }
 
     fun onAddTruckButtonClicked(view:View)
@@ -105,13 +60,6 @@ class MainActivity : AppCompatActivity() {
             removeAddNewCoffeeTruckFragment()
     }
 
-    private fun userProfileCreation(): Any {
-        val userProfileCreation = userProfileCreation ()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fcMainActivity, userProfileCreation)
-        transaction.commit()
-        return TODO("Provide the return value")
-    }
 
     private fun FrameLayout(): Any {
 
