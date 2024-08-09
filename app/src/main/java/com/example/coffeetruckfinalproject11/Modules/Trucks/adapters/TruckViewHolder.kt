@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Modules.Trucks.Modules
+package com.example.coffeetruckfinalproject11.Modules.Trucks.adapters
 
 /*import android.util.Log
 import android.view.View
@@ -59,7 +59,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coffeetruckfinalproject11.Model.Truck
+import com.example.coffeetruckfinalproject11.model.Truck
 import com.example.coffeetruckfinalproject11.R
 
 class TruckViewHolder(

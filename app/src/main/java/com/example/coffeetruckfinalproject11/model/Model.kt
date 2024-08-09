@@ -1,6 +1,4 @@
-package com.example.coffeetruckfinalproject11.Model
-
-import com.example.coffeetruckfinalproject11.Model.Truck
+package com.example.coffeetruckfinalproject11.model
 
 class Model private constructor() {
     val trucks: MutableList<Truck> = ArrayList()

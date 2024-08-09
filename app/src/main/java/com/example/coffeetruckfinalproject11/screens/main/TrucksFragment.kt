@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coffeetruckfinalproject11.Model.Model
-import com.example.coffeetruckfinalproject11.Model.Truck
-import com.example.coffeetruckfinalproject11.Modules.Trucks.Modules.TrucksRecyclerAdapter
+import com.example.coffeetruckfinalproject11.model.Model
+import com.example.coffeetruckfinalproject11.model.Truck
+import com.example.coffeetruckfinalproject11.Modules.Trucks.adapters.TrucksRecyclerAdapter
 import com.example.coffeetruckfinalproject11.R
 
 /*class TrucksFragment : Fragment()

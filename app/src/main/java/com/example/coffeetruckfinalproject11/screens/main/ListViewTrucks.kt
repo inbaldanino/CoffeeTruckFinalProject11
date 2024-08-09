@@ -10,9 +10,9 @@ import android.widget.CheckBox
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.coffeetruckfinalproject11.Model.Truck
+import com.example.coffeetruckfinalproject11.model.Truck
 import com.example.coffeetruckfinalproject11.R
-import com.example.coffeetruckfinalproject11.Model.Model
+import com.example.coffeetruckfinalproject11.model.Model
 
 class ListViewTrucks : Fragment() {
     var truckList : ListView?=null

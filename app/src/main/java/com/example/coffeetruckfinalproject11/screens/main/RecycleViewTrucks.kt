@@ -10,8 +10,8 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coffeetruckfinalproject11.Model.Model
-import com.example.coffeetruckfinalproject11.Model.Truck
+import com.example.coffeetruckfinalproject11.model.Model
+import com.example.coffeetruckfinalproject11.model.Truck
 import com.example.coffeetruckfinalproject11.R
 
 class RecycleViewTrucks : Fragment() {

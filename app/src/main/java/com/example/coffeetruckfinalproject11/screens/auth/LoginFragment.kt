@@ -26,13 +26,19 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNoAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
+
+    /*FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+        "yael_123451@walla.com",
+        "123456"
+    )
+
+     */
 
     override fun onDestroyView() {
         super.onDestroyView()

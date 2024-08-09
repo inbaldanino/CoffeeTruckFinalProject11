@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Model
+package com.example.coffeetruckfinalproject11.model
 
 import android.os.Parcel
 import android.os.Parcelable

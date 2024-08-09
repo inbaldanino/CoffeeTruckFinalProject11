@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Modules.Trucks.Modules
+package com.example.coffeetruckfinalproject11.Modules.Trucks.adapters
 
 /*import android.os.Bundle
 import android.util.Log
@@ -38,7 +38,7 @@ class TrucksRecyclerAdapter (var trucks: MutableList<Truck>?): RecyclerView.Adap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coffeetruckfinalproject11.Model.Truck
+import com.example.coffeetruckfinalproject11.model.Truck
 import com.example.coffeetruckfinalproject11.R
 
 class TrucksRecyclerAdapter(

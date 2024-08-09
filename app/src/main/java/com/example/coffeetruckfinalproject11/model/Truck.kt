@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Model
+package com.example.coffeetruckfinalproject11.model
 
 data class Truck(
         val name: String,
