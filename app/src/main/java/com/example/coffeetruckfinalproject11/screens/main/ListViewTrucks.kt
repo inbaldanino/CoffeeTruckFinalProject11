@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Modules.Trucks
+package com.example.coffeetruckfinalproject11.screens.main
 
 import android.os.Bundle
 import android.util.Log

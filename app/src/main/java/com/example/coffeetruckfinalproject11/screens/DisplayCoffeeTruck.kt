@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11
+package com.example.coffeetruckfinalproject11.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

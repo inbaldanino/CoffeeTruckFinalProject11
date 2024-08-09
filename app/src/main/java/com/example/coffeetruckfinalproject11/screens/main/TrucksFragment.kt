@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Modules.Trucks
+package com.example.coffeetruckfinalproject11.screens.main
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeetruckfinalproject11.Model.Model
 import com.example.coffeetruckfinalproject11.Model.Truck
-import com.example.coffeetruckfinalproject11.Modules.Trucks.Adapter.TrucksRecyclerAdapter
+import com.example.coffeetruckfinalproject11.Modules.Trucks.Modules.TrucksRecyclerAdapter
 import com.example.coffeetruckfinalproject11.R
 
 /*class TrucksFragment : Fragment()

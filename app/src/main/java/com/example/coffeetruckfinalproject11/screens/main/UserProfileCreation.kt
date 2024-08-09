@@ -1,8 +1,6 @@
-package com.example.coffeetruckfinalproject11
+package com.example.coffeetruckfinalproject11.screens.main
 
-
-
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,13 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
-import java.net.URI
-
 
 class UserProfileCreation : Fragment() {
 
@@ -40,7 +35,7 @@ class UserProfileCreation : Fragment() {
 
     var startCamera: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(), { result ->
-            if (result.resultCode === RESULT_OK) {
+            if (result.resultCode === Activity.RESULT_OK) {
                 uri = result.data?.data
                 image?.setImageURI(uri)
             }
@@ -90,4 +85,3 @@ class UserProfileCreation : Fragment() {
     }
 
 }
-

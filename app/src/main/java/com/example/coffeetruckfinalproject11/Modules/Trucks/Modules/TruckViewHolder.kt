@@ -1,6 +1,4 @@
-package com.example.coffeetruckfinalproject11.Modules.Trucks.Adapter
-
-import com.example.coffeetruckfinalproject11.Modules.Trucks.RecycleViewTrucks
+package com.example.coffeetruckfinalproject11.Modules.Trucks.Modules
 
 /*import android.util.Log
 import android.view.View

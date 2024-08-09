@@ -1,4 +1,4 @@
-package com.example.coffeetruckfinalproject11.Modules.Trucks.Adapter
+package com.example.coffeetruckfinalproject11.Modules.Trucks.Modules
 
 /*import android.os.Bundle
 import android.util.Log
@@ -39,7 +39,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeetruckfinalproject11.Model.Truck
-import com.example.coffeetruckfinalproject11.Modules.Trucks.RecycleViewTrucks
 import com.example.coffeetruckfinalproject11.R
 
 class TrucksRecyclerAdapter(

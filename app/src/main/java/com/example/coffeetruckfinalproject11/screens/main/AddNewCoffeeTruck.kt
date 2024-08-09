@@ -1,16 +1,13 @@
-package com.example.coffeetruckfinalproject11
+package com.example.coffeetruckfinalproject11.screens.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import android.widget.EditText
 import android.widget.Button
-import androidx.lifecycle.ViewModel
-//import androidx.fragment.app.activityViewModels
-
+import android.widget.EditText
+import androidx.fragment.app.Fragment
+import com.example.coffeetruckfinalproject11.Model.CoffeeTruck
 
 class AddNewCoffeeTruck : Fragment()
 {
@@ -52,7 +49,16 @@ class AddNewCoffeeTruck : Fragment()
             val reviews = editTextReviews.text.toString()
             val photoUri: String? = null
 
-            val coffeeTruck = CoffeeTruck(name, location, kosher, openingHours, photoUri, recommendations, tripSuggestions, reviews)
+            val coffeeTruck = CoffeeTruck(
+                name,
+                location,
+                kosher,
+                openingHours,
+                photoUri,
+                recommendations,
+                tripSuggestions,
+                reviews
+            )
             //coffeeTruckViewModel.addCoffeeTruck(coffeeTruck)
 
             // Close the fragment
@@ -63,4 +69,3 @@ class AddNewCoffeeTruck : Fragment()
     }
 
 }
-
