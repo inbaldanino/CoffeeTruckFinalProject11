@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.coffeetruckfinalproject11.R
@@ -18,7 +19,7 @@ import com.example.coffeetruckfinalproject11.viewmodels.AuthViewModel
 
 class RegisterFragment : Fragment() {
 
-    private val viewModel by viewModels<AuthViewModel> {  }
+    private val viewModel by activityViewModels<AuthViewModel>()
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding: FragmentRegisterBinding get() = _binding!!

@@ -1,113 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AddNewCoffeeTruck">
+    tools:context=".screens.main.AddNewCoffeeTruck">
 
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="שם עגלת הקפה"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="32dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
-
-    <EditText
-        android:id="@+id/editTextLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="מיקום"
-        app:layout_constraintTop_toBottomOf="@id/editTextName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editTextKosher"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="כשר/לא כשר"
-        app:layout_constraintTop_toBottomOf="@id/editTextLocation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+        <LinearLayout
+            android:id="@+id/pickImageLayout"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/rounded_line"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextOpeningHours"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="שעות פתיחה"
-        app:layout_constraintTop_toBottomOf="@id/editTextKosher"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+            <ImageView
+                android:id="@+id/selectedImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/pick_image" />
 
-    <EditText
-        android:id="@+id/editTextRecommendations"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="המלצות"
-        app:layout_constraintTop_toBottomOf="@id/editTextOpeningHours"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Pick image (JPEG, JPG, PNG)"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextTripSuggestions"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="המלצות לטיול בקרבת העגלה"
-        app:layout_constraintTop_toBottomOf="@id/editTextRecommendations"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="שם עגלת הקפה" />
 
-    <EditText
-        android:id="@+id/editTextReviews"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="ביקורות"
-        app:layout_constraintTop_toBottomOf="@id/editTextTripSuggestions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/editTextLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="מיקום" />
 
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="הוסף עגלת קפה"
-        app:layout_constraintTop_toBottomOf="@id/editTextReviews"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editTextKosher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="כשר/לא כשר" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/flAddCoffeeTruck"
-        android:layout_width="406dp"
-        android:layout_height="725dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-11dp"
-        tools:layout_editor_absoluteY="3dp" />
+        <EditText
+            android:id="@+id/editTextOpeningHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="שעות פתיחה" />
+
+        <EditText
+            android:id="@+id/editTextRecommendations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="המלצות" />
+
+        <EditText
+            android:id="@+id/editTextTripSuggestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="המלצות לטיול בקרבת העגלה" />
+
+        <EditText
+            android:id="@+id/editTextReviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ביקורות" />
+
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="הוסף עגלת קפה" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,26 +3,28 @@ package com.example.coffeetruckfinalproject11.database
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.coffeetruckfinalproject11.model.User
+import com.example.coffeetruckfinalproject11.models.CoffeeTruck
 import com.example.coffeetruckfinalproject11.models.User
-import com.google.firebase.Firebase
+import com.example.coffeetruckfinalproject11.models.dto.CoffeeTruckCreationForm
+import com.example.coffeetruckfinalproject11.models.dto.UserRegistrationForm
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.firestoreSettings
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.nio.file.Path
-import kotlin.coroutines.AbstractCoroutineContextElement
-import kotlin.coroutines.Continuation
 
 class Database<UserRegistrationForm> private constructor() {
-    private val storage = FirebaseStorage.getInstance()
-    private val auth = FirebaseStorage.getInstance()
-    private val firebase = FirebaseStorage.getInstance()
+    private val storage = FirebaseStorage.getInstance() //upload images,files etc..
+    private val auth = FirebaseStorage.getInstance()  // register,sign in,forgot pass,etc...
+    private val firebase = FirebaseStorage.getInstance() // extra info, coffee trucks, database
 
     private var user: MutableLiveData<User?> = MutableLiveData<User?>(null)
 
@@ -62,6 +64,38 @@ class Database<UserRegistrationForm> private constructor() {
             return this.instance!!
         }
     }
+
+    suspend fun addCoffeeTruck(coffeeTruckCreationForm: CoffeeTruckCreationForm): CoffeeTruck =
+        withContext(Dispatchers.IO) {
+            val deferredValue = CompletableDeferred<CoffeeTruck>()
+            val imageUrl = uploadImage(
+                coffeeTruckCreationForm.photoUri,
+                "trucks/${coffeeTruckCreationForm.user}_${coffeeTruckCreationForm.name}"
+            )
+
+            val truck = CoffeeTruck(
+                name = coffeeTruckCreationForm.name,
+                location = coffeeTruckCreationForm.location,
+                kosher = coffeeTruckCreationForm.kosher,
+                openingHours = coffeeTruckCreationForm.openingHours,
+                photoUri = imageUrl,
+                recommendations = coffeeTruckCreationForm.recommendations,
+                tripSuggestions = coffeeTruckCreationForm.tripSuggestions,
+                user = coffeeTruckCreationForm.user
+            )
+
+            val newDoc = fireStore.collection("trucks")
+                .document()
+            truck.id = newDoc.id
+            newDoc.set(truck)
+                .addOnSuccessListener {
+                    deferredValue.complete(truck)
+                }
+                .addOnFailureListener {
+                    deferredValue.completeExceptionally(it)
+                }
+            deferredValue.await()
+        }
 
     private suspend fun uploadImage(
         uri: Uri,

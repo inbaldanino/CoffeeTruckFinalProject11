@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeetruckfinalproject11.database.Database
+import com.example.coffeetruckfinalproject11.model.dto.UserRegistrationForm
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -36,7 +37,7 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-
+    //fun register(form: UserRegistrationForm)
     fun register(form: UserRegistrationForm, callback: () -> Unit) {
         viewModelScope.launch(Dispatchers.Main) {
             try {
@@ -54,7 +55,10 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    //fun register(form: UserRegistrationForm) {
-
+    override fun onCleared() {
+        super.onCleared()
+        Database.getInstance().stopListeningToUser()
     }
+
+}
 

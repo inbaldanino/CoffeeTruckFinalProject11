@@ -1,103 +1,71 @@
 package com.example.coffeetruckfinalproject11.screens.main
 
 import android.os.Bundle
+import android.provider.ContactsContract.Data
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.coffeetruckfinalproject11.viewmodels.CoffeeTruckViewModel
 import com.example.coffeetruckfinalproject11.R
+import com.example.coffeetruckfinalproject11.database.Database
+import com.example.coffeetruckfinalproject11.databinding.ActivityMainBinding
+import com.example.coffeetruckfinalproject11.viewmodels.LoadingState
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val coffeeTruckViewModel: CoffeeTruckViewModel by viewModels()
-    private var listViewFragment: ListViewTrucks? = null
-    private var addNewCoffeeTruckFragment: AddNewCoffeeTruck? = null
 
-    class ButtonOnClickListener: View.OnClickListener {
-        override fun onClick(v: View?) {
-        }
-    }
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        coffeeTruckViewModel.loadingState.observe(this) { state ->
+            when (state) {
+                is LoadingState.Loading -> {
+                    binding.pBarAuth.visibility = View.VISIBLE
+                }
 
-        //val addNewCoffeeTruckButton: Button = findViewById(R.id.addNewCoffeeTruckButton)
-        //addNewCoffeeTruckButton.setOnClickListener { onAddNewCoffeeTruckClicked() }
-        /*val userProfileCreation = userProfileCreation ()
-        val transaction = supportFragmentManager.beginTransaction()
-        val addProfileCreationButton: Button = findViewById(R.id.btnCreateNewProfile)
-        addProfileCreationButton.setOnClickListener(::onAddTruckButtonClicked)
-        transaction.add(R.id.fcMainActivity, userProfileCreation)
-        transaction.commit()
-        if (savedInstanceState == null) {
-            displayTruckListView()
+                is LoadingState.Loaded -> {
+                    binding.pBarAuth.visibility = View.GONE
+                }
+            }
         }
-        val listener = ButtonOnClickListener()
-        addProfileCreationButton.setOnClickListener(listener)
-*/
-    }
 
-    fun onAddTruckButtonClicked(view: View)
-    {
-        if (addNewCoffeeTruckFragment == null)
-            displayAddNewCoffeeTruckFragment()
-        else
-            removeAddNewCoffeeTruckFragment()
-    }
-
-    private fun userProfileCreation(): Any {
-        // val userProfileCreation = userProfileCreation ()
-        //  val transaction = supportFragmentManager.beginTransaction()
-        // transaction.add(R.id.fcMainActivity, userProfileCreation)
-        //transaction.commit()
-        return 0
-    }
-
-    private fun FrameLayout(): Any {
-
-        return TODO("Provide the return value")
-    }
-
-    //functions for the addnewcoffeetruck fragment
-    private fun onAddNewCoffeeTruckClicked(view: View)
-    {
-        if (addNewCoffeeTruckFragment == null)
-            displayAddNewCoffeeTruckFragment()
-        else
-            removeAddNewCoffeeTruckFragment()
-    }
-
-    private fun displayAddNewCoffeeTruckFragment()
-    {
-        addNewCoffeeTruckFragment = AddNewCoffeeTruck()
-        addNewCoffeeTruckFragment?.let {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.flAddCoffeeTruck, it)
-            transaction.addToBackStack("addNewCoffeeTruck")
-            transaction.commit()
+        coffeeTruckViewModel.exception.observe(this) { exc ->
+            Snackbar.make(binding.root, exc.message.toString(), Snackbar.LENGTH_LONG).show()
         }
+
+
+        val bottomNavigation = binding.bottomNavView
+
+        val fragmentContainer = supportFragmentManager.findFragmentById(R.id.mainNavGraph)
+
+
+        val navController = fragmentContainer!!.findNavController()
+
+        NavigationUI.setupWithNavController(bottomNavigation, navController)
+
+
     }
-    private fun removeAddNewCoffeeTruckFragment()
-    {
-        addNewCoffeeTruckFragment?.let {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.remove(it)
-            transaction.addToBackStack("Tag")
-            transaction.commit()
+
+
+    @Deprecated(
+        "Deprecated in Java",
+        ReplaceWith("super.onBackPressed()", "androidx.appcompat.app.AppCompatActivity")
+    )
+    override fun onBackPressed() {
+        if (!findNavController(R.id.mainNavGraph).popBackStack()) {
+            super.onBackPressed()
         }
-        addNewCoffeeTruckFragment = null
-    }
-
-
-    //functions for the listview fragment
-    private fun displayTruckListView() {
-        //listViewFragment = ListViewTruck.newInstance("Another try")
-        listViewFragment = ListViewTrucks()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcMainActivity, listViewFragment!!)
-            .commit()
-        addNewCoffeeTruckFragment = null
     }
 }

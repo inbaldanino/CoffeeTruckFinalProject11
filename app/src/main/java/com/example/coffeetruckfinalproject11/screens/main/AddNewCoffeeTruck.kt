@@ -1,71 +1,164 @@
 package com.example.coffeetruckfinalproject11.screens.main
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.example.coffeetruckfinalproject11.model.CoffeeTruck
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+//import com.example.coffeetruckfinalproject11.models.CoffeeTruck
+import com.example.coffeetruckfinalproject11.R
+import com.example.coffeetruckfinalproject11.databinding.FragmentAddNewCoffeeTruckBinding
+import com.example.coffeetruckfinalproject11.model.dto.CoffeeTruckCreationForm
+import com.example.coffeetruckfinalproject11.models.dto.CoffeeTruckCreationForm
+import com.example.coffeetruckfinalproject11.viewmodels.CoffeeTruckViewModel
 
-class AddNewCoffeeTruck : Fragment()
-{
-    // private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
+class AddNewCoffeeTruck : Fragment() {
+    private val coffeeTruckViewModel: CoffeeTruckViewModel by activityViewModels()
 
-    private lateinit var editTextName: EditText
-    private lateinit var editTextLocation: EditText
-    private lateinit var editTextKosher: EditText
-    private lateinit var editTextOpeningHours: EditText
-    private lateinit var editTextRecommendations: EditText
-    private lateinit var editTextTripSuggestions: EditText
-    private lateinit var editTextReviews: EditText
-    private lateinit var buttonSubmit: Button
-    //
+
+    private var _binding: FragmentAddNewCoffeeTruckBinding? = null
+    private val binding: FragmentAddNewCoffeeTruckBinding get() = _binding!!
+    private var selectedCoffeeTruckImage: Uri? = null
+
+    private val galleryLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        selectedCoffeeTruckImage = uri
+        binding.selectedImage.setImageURI(uri)
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View?
-    {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentAddNewCoffeeTruckBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_new_coffee_truck, container, false)
 
-        editTextName = view.findViewById(R.id.editTextName)
-        editTextLocation = view.findViewById(R.id.editTextLocation)
-        editTextKosher = view.findViewById(R.id.editTextKosher)
-        editTextOpeningHours = view.findViewById(R.id.editTextOpeningHours)
-        editTextRecommendations = view.findViewById(R.id.editTextRecommendations)
-        editTextTripSuggestions = view.findViewById(R.id.editTextTripSuggestions)
-        editTextReviews = view.findViewById(R.id.editTextReviews)
-        buttonSubmit = view.findViewById(R.id.buttonSubmit)
+        return binding.root
+    }
 
-        buttonSubmit.setOnClickListener {
-            val name = editTextName.text.toString()
-            val location = editTextLocation.text.toString()
-            val kosher = editTextKosher.text.toString()
-            val openingHours = editTextOpeningHours.text.toString()
-            val recommendations = editTextRecommendations.text.toString()
-            val tripSuggestions = editTextTripSuggestions.text.toString()
-            val reviews = editTextReviews.text.toString()
-            val photoUri: String? = null
 
-            val coffeeTruck = CoffeeTruck(
-                name,
-                location,
-                kosher,
-                openingHours,
-                photoUri,
-                recommendations,
-                tripSuggestions,
-                reviews
-            )
-            //coffeeTruckViewModel.addCoffeeTruck(coffeeTruck)
-
-            // Close the fragment
-            parentFragmentManager.popBackStack()
-            // Use the collected data (e.g., save to a database or send to an API)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.pickImageLayout.setOnClickListener {
+            galleryLauncher.launch("image/*")
         }
-        return view
+
+        binding.buttonSubmit.setOnClickListener {
+            val name = binding.editTextName.text.toString()
+            val location = binding.editTextLocation.text.toString()
+            val kosher = binding.editTextKosher.text.toString()
+            val openingHours = binding.editTextOpeningHours.text.toString()
+            val recommendations = binding.editTextRecommendations.text.toString()
+            val tripSuggestions = binding.editTextTripSuggestions.text.toString()
+            val reviews = binding.editTextReviews.text.toString()
+
+            if (validateInputs()) {
+                val coffeeTruckForm = CoffeeTruckCreationForm(
+                    name,
+                    location,
+                    kosher,
+                    openingHours,
+                    selectedCoffeeTruckImage!!,
+                    recommendations,
+                    tripSuggestions,
+                    reviews
+                )
+                binding.buttonSubmit.isEnabled = false
+                coffeeTruckViewModel.addCoffeeTruck(coffeeTruckForm)
+                {
+                    binding.buttonSubmit.isEnabled = true
+                }
+                findNavController().popBackStack()
+            }
+
+        }
+    }
+
+
+    private fun validateInputs(): Boolean {
+        val name = binding.editTextName.text.toString()
+        val location = binding.editTextLocation.text.toString()
+        val kosher = binding.editTextKosher.text.toString()
+        val openingHours = binding.editTextOpeningHours.text.toString()
+        val recommendations = binding.editTextRecommendations.text.toString()
+        val tripSuggestions = binding.editTextTripSuggestions.text.toString()
+        val reviews = binding.editTextReviews.text.toString()
+
+        if (selectedCoffeeTruckImage == null) {
+            Toast.makeText(requireContext(), "Image must be selected!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return when {
+            name.isEmpty() -> {
+                Toast.makeText(requireContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show()
+                false
+            }
+
+
+            location.isEmpty() -> {
+                Toast.makeText(requireContext(), "Location cannot be empty", Toast.LENGTH_SHORT)
+                    .show()
+                false
+            }
+
+            kosher.isEmpty() -> {
+                Toast.makeText(requireContext(), "Kosher cannot be empty", Toast.LENGTH_SHORT)
+                    .show()
+                false
+            }
+
+            openingHours.isEmpty() -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Opening Hours cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            recommendations.isEmpty() -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Recommendations cannot be empty",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                false
+            }
+
+            tripSuggestions.isEmpty() -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Trip Suggestions cannot be empty",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                false
+            }
+
+            reviews.isEmpty() -> {
+                Toast.makeText(requireContext(), "Reviews cannot be empty", Toast.LENGTH_SHORT)
+                    .show()
+                false
+            }
+
+            else -> true
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
