@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeetruckfinalproject11.model.Model
 import com.example.coffeetruckfinalproject11.model.Truck
-import com.example.coffeetruckfinalproject11.Modules.Trucks.adapters.TrucksRecyclerAdapter
+import com.example.coffeetruckfinalproject11.adapters.TrucksRecyclerAdapter
 import com.example.coffeetruckfinalproject11.R
 
 /*class TrucksFragment : Fragment()
