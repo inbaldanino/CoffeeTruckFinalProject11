@@ -16,6 +16,9 @@
         android:id="@+id/displayCoffeeTruck"
         android:name="com.example.coffeetruckfinalproject11.screens.main.DisplayCoffeeTruck"
         android:label="DisplayCoffeeTruck" />
+    <argument
+        android:name="truck"
+        app:argType="string" />
     <fragment
         android:id="@+id/recycleViewTrucks"
         android:name="com.example.coffeetruckfinalproject11.screens.main.RecycleViewTrucks"
