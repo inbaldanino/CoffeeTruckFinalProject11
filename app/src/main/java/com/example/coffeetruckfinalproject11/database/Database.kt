@@ -3,10 +3,10 @@ package com.example.coffeetruckfinalproject11.database
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.coffeetruckfinalproject11.models.CoffeeTruck
+import com.example.coffeetruckfinalproject11.model.CoffeeTruck
 import com.example.coffeetruckfinalproject11.models.User
-import com.example.coffeetruckfinalproject11.models.dto.CoffeeTruckCreationForm
-import com.example.coffeetruckfinalproject11.models.dto.UserRegistrationForm
+import com.example.coffeetruckfinalproject11.model.dto.CoffeeTruckCreationForm
+import com.example.coffeetruckfinalproject11.model.dto.UserRegistrationForm
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
@@ -21,12 +21,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Database<UserRegistrationForm> private constructor() {
-    private val storage = FirebaseStorage.getInstance() //upload images,files etc..
-    private val auth = FirebaseStorage.getInstance()  // register,sign in,forgot pass,etc...
-    private val firebase = FirebaseStorage.getInstance() // extra info, coffee trucks, database
+class Database private constructor() {
+    private val storage = FirebaseStorage.getInstance() // Upload images, files, etc.
+    private val auth = FirebaseAuth.getInstance()  // Register, sign in, forgot pass, etc.
+    private val fireStore = FirebaseFirestore.getInstance() // Extra info, coffee trucks, database
 
     private var user: MutableLiveData<User?> = MutableLiveData<User?>(null)
+
+    private var snapShotListener: ListenerRegistration? = null
 
     private var authStateListener: FirebaseAuth.AuthStateListener =
         FirebaseAuth.AuthStateListener { userState ->
@@ -35,6 +37,10 @@ class Database<UserRegistrationForm> private constructor() {
                 snapShotListener = fireStore.collection("users")
                     .document(userState.currentUser!!.uid)
                     .addSnapshotListener { value, error ->
+                        if (error != null) {
+                            return@addSnapshotListener
+                        }
+
                         val currentUser = value?.toObject(User::class.java)
                         currentUser?.let {
                             user.postValue(it)
@@ -54,14 +60,14 @@ class Database<UserRegistrationForm> private constructor() {
         snapShotListener?.remove()
     }
 
-
     companion object {
-        private var instance: Database<Any?>? = null
-        fun getInstance(): Database<Any?> {
+        private var instance: Database? = null
+
+        fun getInstance(): Database {
             if (instance == null) {
                 instance = Database()
             }
-            return this.instance!!
+            return instance!!
         }
     }
 
@@ -122,14 +128,11 @@ class Database<UserRegistrationForm> private constructor() {
         auth.signOut()
     }
 
-
     suspend fun login(
         email: String,
         password: String,
-    ):
-            AuthResult = withContext(Dispatchers.IO) {
+    ): AuthResult = withContext(Dispatchers.IO) {
         val deferredValue = CompletableDeferred<AuthResult>()
-
         auth
             .signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
@@ -140,8 +143,6 @@ class Database<UserRegistrationForm> private constructor() {
             }
         deferredValue.await()
     }
-
-
 
     suspend fun register(
         form: UserRegistrationForm,
@@ -166,9 +167,7 @@ class Database<UserRegistrationForm> private constructor() {
                             val imageUrl = uploadImage(uri, "userImages/${authResult.user!!.uid}")
                             user.image = imageUrl
                         } catch (e: Exception) {
-                            coroutineScope.launch(Dispatchers.Main) {
-                                deferredValue.completeExceptionally(e)
-                            }
+                            deferredValue.completeExceptionally(e)
                         }
                     }
 
@@ -176,21 +175,15 @@ class Database<UserRegistrationForm> private constructor() {
                         .document(user.id)
                         .set(user)
                         .addOnSuccessListener {
-                            coroutineScope.launch(Dispatchers.Main) {
-                                deferredValue.complete(user)
-                            }
+                            deferredValue.complete(user)
                         }
                         .addOnFailureListener {
-                            coroutineScope.launch(Dispatchers.Main) {
-                                deferredValue.completeExceptionally(it)
-                            }
+                            deferredValue.completeExceptionally(it)
                         }
                 }
             }
             .addOnFailureListener {
-                coroutineScope.launch(Dispatchers.Main) {
-                    deferredValue.completeExceptionally(it)
-                }
+                deferredValue.completeExceptionally(it)
             }
         deferredValue.await()
     }
@@ -198,5 +191,4 @@ class Database<UserRegistrationForm> private constructor() {
     fun getUser(): LiveData<User?> {
         return user
     }
-
 }
