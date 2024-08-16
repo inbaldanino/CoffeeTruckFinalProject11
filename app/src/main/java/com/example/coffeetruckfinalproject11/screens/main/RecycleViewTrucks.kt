@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coffeetruckfinalproject11.adapters.TrucksRecyclerAdapter
 import com.example.coffeetruckfinalproject11.databinding.FragmentRecycleViewTrucksBinding
-import com.example.coffeetruckfinalproject11.models.CoffeeTruck
+import com.example.coffeetruckfinalproject11.model.CoffeeTruck
 import com.example.coffeetruckfinalproject11.viewmodels.CoffeeTruckViewModel
+import com.google.gson.Gson
 
 class RecycleViewTrucks : Fragment() {
 
@@ -34,8 +36,17 @@ class RecycleViewTrucks : Fragment() {
         viewModel.coffeeTrucks.observe(viewLifecycleOwner) {
             val adapter = //get truck list
                 TrucksRecyclerAdapter(it, object : TrucksRecyclerAdapter.OnItemClickListener {
-                    override fun onTruckClicked(truck: CoffeeTruck) {
+                    fun Any.onTruckClicked(truck: CoffeeTruck) {
+                        findNavController()
+                            .navigate(
+                                RecycleViewTrucksDirections.actionRecycleViewTrucksToDisplayCoffeeTruck(
+                                    Gson().toJson(truck)
+                                )
+                            )
+                    }
 
+                    override fun onTruckClicked(truck: CoffeeTruck) {
+                        TODO("Not yet implemented")
                     }
                 })
             binding.rvRecycleViewTrucks.adapter = adapter //connect to the recyclerlist

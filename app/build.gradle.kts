@@ -45,6 +45,7 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.google.code.gson:gson:2.11.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

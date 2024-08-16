@@ -1,23 +1,17 @@
 package com.example.coffeetruckfinalproject11.screens.main
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-//import com.example.coffeetruckfinalproject11.models.CoffeeTruck
-import com.example.coffeetruckfinalproject11.R
 import com.example.coffeetruckfinalproject11.databinding.FragmentAddNewCoffeeTruckBinding
 import com.example.coffeetruckfinalproject11.model.dto.CoffeeTruckCreationForm
-import com.example.coffeetruckfinalproject11.models.dto.CoffeeTruckCreationForm
 import com.example.coffeetruckfinalproject11.viewmodels.CoffeeTruckViewModel
 
 class AddNewCoffeeTruck : Fragment() {
@@ -60,18 +54,17 @@ class AddNewCoffeeTruck : Fragment() {
             val openingHours = binding.editTextOpeningHours.text.toString()
             val recommendations = binding.editTextRecommendations.text.toString()
             val tripSuggestions = binding.editTextTripSuggestions.text.toString()
-            val reviews = binding.editTextReviews.text.toString()
+
 
             if (validateInputs()) {
                 val coffeeTruckForm = CoffeeTruckCreationForm(
-                    name,
-                    location,
-                    kosher,
-                    openingHours,
-                    selectedCoffeeTruckImage!!,
-                    recommendations,
-                    tripSuggestions,
-                    reviews
+                   name= name,
+                    location= location,
+                    kosher=kosher,
+                    openingHours=openingHours,
+                    photoUri = selectedCoffeeTruckImage!!,
+                    recommendations= recommendations,
+                    tripSuggestions= tripSuggestions,
                 )
                 binding.buttonSubmit.isEnabled = false
                 coffeeTruckViewModel.addCoffeeTruck(coffeeTruckForm)
@@ -83,8 +76,6 @@ class AddNewCoffeeTruck : Fragment() {
 
         }
     }
-
-
     private fun validateInputs(): Boolean {
         val name = binding.editTextName.text.toString()
         val location = binding.editTextLocation.text.toString()
@@ -92,7 +83,7 @@ class AddNewCoffeeTruck : Fragment() {
         val openingHours = binding.editTextOpeningHours.text.toString()
         val recommendations = binding.editTextRecommendations.text.toString()
         val tripSuggestions = binding.editTextTripSuggestions.text.toString()
-        val reviews = binding.editTextReviews.text.toString()
+
 
         if (selectedCoffeeTruckImage == null) {
             Toast.makeText(requireContext(), "Image must be selected!", Toast.LENGTH_SHORT).show()
@@ -145,13 +136,6 @@ class AddNewCoffeeTruck : Fragment() {
                     .show()
                 false
             }
-
-            reviews.isEmpty() -> {
-                Toast.makeText(requireContext(), "Reviews cannot be empty", Toast.LENGTH_SHORT)
-                    .show()
-                false
-            }
-
             else -> true
         }
     }

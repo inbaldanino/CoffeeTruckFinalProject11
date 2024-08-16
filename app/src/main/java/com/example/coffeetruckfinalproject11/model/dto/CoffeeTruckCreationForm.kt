@@ -11,5 +11,5 @@ data class CoffeeTruckCreationForm(
     val photoUri: Uri,
     val recommendations: String,
     val tripSuggestions: String,
-    val user: String = FirebaseAuth.getInstance().currentUser!!.uid,
+    val user: String = FirebaseAuth.getInstance().currentUser!!.uid
 )
