@@ -75,11 +75,6 @@
             android:layout_height="wrap_content"
             android:hint="המלצות לטיול בקרבת העגלה" />
 
-        <EditText
-            android:id="@+id/editTextReviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ביקורות" />
 
         <Button
             android:id="@+id/buttonSubmit"

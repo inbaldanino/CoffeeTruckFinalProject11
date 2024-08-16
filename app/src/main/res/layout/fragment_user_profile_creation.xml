@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#679591"
-    tools:context=".UserProfileCreation">
+    tools:context=".screens.main.UserProfileCreation">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

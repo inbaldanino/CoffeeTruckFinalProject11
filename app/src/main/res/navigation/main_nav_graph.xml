@@ -5,10 +5,6 @@
     app:startDestination="@id/recycleViewTrucks">
 
     <fragment
-        android:id="@+id/listViewTrucks"
-        android:name="com.example.coffeetruckfinalproject11.screens.main.ListViewTrucks"
-        android:label="ListViewTrucks" />
-    <fragment
         android:id="@+id/addNewCoffeeTruck"
         android:name="com.example.coffeetruckfinalproject11.screens.main.AddNewCoffeeTruck"
         android:label="AddNewCoffeeTruck" />
