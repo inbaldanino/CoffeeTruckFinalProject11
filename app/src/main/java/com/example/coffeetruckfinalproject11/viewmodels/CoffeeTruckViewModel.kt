@@ -27,9 +27,9 @@ class CoffeeTruckViewModel : ViewModel() {
     }
 
     fun addCoffeeTruck(coffeeTruckForm: CoffeeTruckCreationForm, callback: () -> Unit) {
-        viewModelScope.launch {
+        viewModelScope.launch { //launch so it won't finish before it's time
             try {
-                loadingState.postValue(LoadingState.Loading)
+                loadingState.postValue(LoadingState.Loading) //waiting
                 Database.getInstance().addCoffeeTruck(coffeeTruckForm)
             } catch (e: Exception) {
                 exception.postValue(e)

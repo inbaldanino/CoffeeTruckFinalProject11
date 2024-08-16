@@ -21,10 +21,6 @@
         android:name="com.example.coffeetruckfinalproject11.screens.main.RecycleViewTrucks"
         android:label="RecycleViewTrucks" />
     <fragment
-        android:id="@+id/trucksFragment"
-        android:name="com.example.coffeetruckfinalproject11.screens.main.TrucksFragment"
-        android:label="TrucksFragment" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.coffeetruckfinalproject11.screens.main.ProfileFragment"
         android:label="ProfileFragment" />
