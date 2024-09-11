@@ -12,6 +12,6 @@ data class CoffeeTruck(
     var photoUri: String = "",
     var recommendations: String = "",
     var tripSuggestions: String = "",
-    var reviews: List<String> = listOf(""),
+    var reviews: MutableList<String> = mutableListOf(""),
     var user: String = ""
 )

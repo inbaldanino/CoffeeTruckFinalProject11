@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.coffeetruckfinalproject11.R
@@ -50,6 +53,29 @@ class DisplayCoffeeTruck : Fragment() {
             truck.reviews
         )
         binding.reviewsListView.adapter = adapter
+        binding.addReview.setOnClickListener()
+        {
+            val reviewView = layoutInflater.inflate(R.layout.review_layout, null, false)
+            val reviewTv = reviewView.findViewById<EditText>(R.id.etReview)
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setTitle("Add review for ${truck.name}")
+                .setView(reviewView)
+                .setPositiveButton("Submit") {_,_ ->
+                    val review = reviewTv.text.toString()
+                    if (review.isEmpty())
+                    {
+                        Toast.makeText(requireContext(),
+                            "Can not posrt an empty review",
+                            Toast.LENGTH_LONG)
+                            .show()
+                    }
+                }
+                .setNegativeButton("Canel", null)
+                .show()
+        }
+        else{
+
+        }
     }
 
     override fun onDestroyView() {

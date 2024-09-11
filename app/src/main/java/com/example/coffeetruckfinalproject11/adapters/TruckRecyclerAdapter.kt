@@ -41,7 +41,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeetruckfinalproject11.R
-import com.example.coffeetruckfinalproject11.models.CoffeeTruck
+import com.example.coffeetruckfinalproject11.models.    CoffeeTruck
 import com.squareup.picasso.Picasso
 
 class TrucksRecyclerAdapter(
