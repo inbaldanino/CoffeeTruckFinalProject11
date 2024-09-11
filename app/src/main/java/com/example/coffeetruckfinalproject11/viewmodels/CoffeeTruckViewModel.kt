@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeetruckfinalproject11.database.Database
 import com.example.coffeetruckfinalproject11.model.CoffeeTruck
+import com.example.coffeetruckfinalproject11.model.dto.CoffeeTruckCreationForm
 import com.example.coffeetruckfinalproject11.models.CoffeeTruck
 import com.example.coffeetruckfinalproject11.models.dto.CoffeeTruckCreationForm
 import com.google.firebase.firestore.ListenerRegistration
@@ -27,10 +28,22 @@ class CoffeeTruckViewModel : ViewModel() {
         coffeeTrucksListenerRegistration = Database.getInstance().listenCoffeeTrucks(_coffeeTrucks)
     }
 
-    fun addReview(truck:CoffeeTruck, review:String)
+    fun addReview(truck:CoffeeTruck, review:String, callback: () -> Unit)
     {
-        truck.reviews.add(review)
+        viewModelScope.launch { //launch so it won't finish before it's time
+            try {
+                truck.reviews.add(review)
+                loadingState.postValue(LoadingState.Loading) //waiting
+                Database.getInstance().saveCoffeeTruck(truck)
 
+            } catch (e: Exception) {
+                truck.reviews.remove(review)
+                exception.postValue(e)
+
+            } finally {
+                loadingState.postValue(LoadingState.Loaded)
+                callback()
+            }
     }
 
     fun addCoffeeTruck(coffeeTruckForm: CoffeeTruckCreationForm, callback: () -> Unit) {

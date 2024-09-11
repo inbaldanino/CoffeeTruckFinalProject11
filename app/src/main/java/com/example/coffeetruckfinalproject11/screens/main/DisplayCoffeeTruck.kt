@@ -9,10 +9,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.coffeetruckfinalproject11.R
 import com.example.coffeetruckfinalproject11.databinding.FragmentDisplayCoffeeTruckBinding
 import com.example.coffeetruckfinalproject11.model.CoffeeTruck
+import com.example.coffeetruckfinalproject11.viewmodels.CoffeeTruckViewModel
 import com.google.gson.Gson
 
 class DisplayCoffeeTruck : Fragment() {
@@ -21,6 +23,7 @@ class DisplayCoffeeTruck : Fragment() {
     private val binding: FragmentDisplayCoffeeTruckBinding get() = _binding!!
     private val params: DisplayCoffeeTruckArgs by navArgs()
 
+    private val viewModel : CoffeeTruckViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,17 +67,28 @@ class DisplayCoffeeTruck : Fragment() {
                     val review = reviewTv.text.toString()
                     if (review.isEmpty())
                     {
-                        Toast.makeText(requireContext(),
-                            "Can not posrt an empty review",
-                            Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Can not post an empty review",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                }
-                .setNegativeButton("Canel", null)
-                .show()
-        }
-        else{
+                    else{
+                        viewModel.addReview(truck, review)
 
+                        {
+                            Toast.makeText(requireContext(),
+                                "Review was posted successfully",
+                                Toast.LENGTH_LONG)
+                                .show()
+                            adapter.add(review)
+                            //Will refresh the list
+                            adapter.notifyDataSetChanged()
+                        }
+                }
+        }
+                .setNegativeButton("Cancel", null)
+                .show()
         }
     }
 
