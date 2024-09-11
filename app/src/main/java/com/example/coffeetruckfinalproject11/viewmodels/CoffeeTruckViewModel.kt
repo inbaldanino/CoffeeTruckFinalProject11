@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.coffeetruckfinalproject11.database.Database
 import com.example.coffeetruckfinalproject11.model.CoffeeTruck
 import com.example.coffeetruckfinalproject11.model.dto.CoffeeTruckCreationForm
-import com.example.coffeetruckfinalproject11.models.CoffeeTruck
-import com.example.coffeetruckfinalproject11.models.dto.CoffeeTruckCreationForm
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.launch
 
