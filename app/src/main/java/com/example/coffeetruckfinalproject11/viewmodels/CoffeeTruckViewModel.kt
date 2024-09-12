@@ -26,6 +26,10 @@ class CoffeeTruckViewModel : ViewModel() {
         coffeeTrucksListenerRegistration = Database.getInstance().listenCoffeeTrucks(_coffeeTrucks)
     }
 
+    fun logOut()  {
+        Database.getInstance().logout()
+    }
+
     fun addReview(truck:CoffeeTruck, review:String, callback: () -> Unit)
     {
         viewModelScope.launch { //launch so it won't finish before it's time
