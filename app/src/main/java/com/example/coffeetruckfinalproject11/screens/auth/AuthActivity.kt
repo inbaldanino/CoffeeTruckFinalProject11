@@ -41,7 +41,7 @@ class AuthActivity : AppCompatActivity() {
 
         }
         viewModel.user.observe(this) { user ->
-            if(user != null) {
+            if(user.data != null) {
                 viewModel.user.removeObservers(this)
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
