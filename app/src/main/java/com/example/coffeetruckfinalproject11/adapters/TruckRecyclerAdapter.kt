@@ -37,6 +37,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -66,15 +67,20 @@ class TrucksRecyclerAdapter(
     }
 
     //viewholder
-    class TruckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class TruckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val nameTextView: TextView = itemView.findViewById(R.id.tvRowTruckName)
         private val locationTextView: TextView = itemView.findViewById(R.id.tvRowTruckLocation)
         private val reviewCountTextView: TextView = itemView.findViewById(R.id.tvRowTruckReviewCount)
 
         private val truckImageView: ImageView = itemView.findViewById(R.id.truckImageView)
+        private val viewCoffeeTruckBtn: Button = itemView.findViewById(R.id.viewBtn)
+
         @SuppressLint("SetTextI18n")
         fun bind(truck: CoffeeTruck) {
+            viewCoffeeTruckBtn.setOnClickListener {
+                listener.onTruckClicked(truck)
+            }
             nameTextView.text = truck.name
             locationTextView.text = truck.location
             Picasso.get()

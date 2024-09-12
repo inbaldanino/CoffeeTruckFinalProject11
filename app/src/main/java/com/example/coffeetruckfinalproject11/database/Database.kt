@@ -71,14 +71,14 @@ class Database private constructor() {
         }
     }
 
-    suspend fun saveCoffeeTruck(truck:CoffeeTruck):Void = withContext(Dispatchers.IO) {
+    suspend fun saveCoffeeTruck(truck:CoffeeTruck):Void? = withContext(Dispatchers.IO) {
         //for async operations
-        val value = CompletableDeferred<Void>()
+        val value = CompletableDeferred<Void?>()
         fireStore.collection("trucks")
             .document(truck.id)
             .set(truck)
             .addOnSuccessListener {
-                value.complete(it)
+                value.complete(null)
             }
             .addOnFailureListener{
                 value.completeExceptionally(it)
