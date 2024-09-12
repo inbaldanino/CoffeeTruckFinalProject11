@@ -3,6 +3,7 @@ package com.example.coffeetruckfinalproject11.database
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.coffeetruckfinalproject11.Resource
 import com.example.coffeetruckfinalproject11.model.CoffeeTruck
 import com.example.coffeetruckfinalproject11.models.User
 import com.example.coffeetruckfinalproject11.model.dto.CoffeeTruckCreationForm
@@ -43,10 +44,11 @@ class Database private constructor() {
 
                         val currentUser = value?.toObject(User::class.java)
                         currentUser?.let {
-                            user.postValue(it)
+                            user.postValue(Resource(false, it))
                         }
                     }
             } else {
+                user.postValue(Resource(false, null))
                 snapShotListener?.remove()
             }
         }

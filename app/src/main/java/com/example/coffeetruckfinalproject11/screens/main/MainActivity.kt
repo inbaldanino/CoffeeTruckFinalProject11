@@ -1,5 +1,6 @@
 package com.example.coffeetruckfinalproject11.screens.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.Data
 import android.util.Log
@@ -16,6 +17,7 @@ import com.example.coffeetruckfinalproject11.viewmodels.CoffeeTruckViewModel
 import com.example.coffeetruckfinalproject11.R
 import com.example.coffeetruckfinalproject11.database.Database
 import com.example.coffeetruckfinalproject11.databinding.ActivityMainBinding
+import com.example.coffeetruckfinalproject11.screens.auth.AuthActivity
 import com.example.coffeetruckfinalproject11.viewmodels.LoadingState
 import com.google.android.material.snackbar.Snackbar
 
@@ -54,7 +56,13 @@ class MainActivity : AppCompatActivity() {
         val navController = fragmentContainer!!.findNavController()
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
-
+        coffeeTruckViewModel.user.observe(this) { user ->
+            if (!user.loading && user.data == null) {
+                coffeeTruckViewModel.user.removeObservers(this)
+                startActivity(Intent(this, AuthActivity::class.java))
+                finish()
+            }
+        }
 
     }
 
