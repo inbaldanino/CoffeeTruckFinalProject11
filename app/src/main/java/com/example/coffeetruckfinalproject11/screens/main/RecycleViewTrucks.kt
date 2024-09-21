@@ -36,17 +36,14 @@ class RecycleViewTrucks : Fragment() {
         viewModel.coffeeTrucks.observe(viewLifecycleOwner) {
             val adapter = //get truck list
                 TrucksRecyclerAdapter(it, object : TrucksRecyclerAdapter.OnItemClickListener {
-                    fun Any.onTruckClicked(truck: CoffeeTruck) {
+
+                    override fun onTruckClicked(truck: CoffeeTruck) {
                         findNavController()
                             .navigate(
                                 RecycleViewTrucksDirections.actionRecycleViewTrucksToDisplayCoffeeTruck(
                                     Gson().toJson(truck)
                                 )
                             )
-                    }
-
-                    override fun onTruckClicked(truck: CoffeeTruck) {
-                        TODO("Not yet implemented")
                     }
                 })
             binding.rvRecycleViewTrucks.adapter = adapter //connect to the recyclerlist
