@@ -11,14 +11,20 @@
     <fragment
         android:id="@+id/displayCoffeeTruck"
         android:name="com.example.coffeetruckfinalproject11.screens.main.DisplayCoffeeTruck"
-        android:label="DisplayCoffeeTruck" />
+        android:label="DisplayCoffeeTruck" >
+        <argument app:argType="string" android:name="truck"/>
+    </fragment>
     <argument
         android:name="truck"
         app:argType="string" />
     <fragment
         android:id="@+id/recycleViewTrucks"
         android:name="com.example.coffeetruckfinalproject11.screens.main.RecycleViewTrucks"
-        android:label="RecycleViewTrucks" />
+        android:label="RecycleViewTrucks" >
+        <action
+            android:id="@+id/action_recycleViewTrucks_to_displayCoffeeTruck"
+            app:destination="@id/displayCoffeeTruck" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.coffeetruckfinalproject11.screens.main.ProfileFragment"

@@ -27,7 +27,7 @@ class Database private constructor() {
     private val auth = FirebaseAuth.getInstance()  // Register, sign in, forgot pass, etc.
     private val fireStore = FirebaseFirestore.getInstance() // Extra info, coffee trucks, database
 
-    private var user: MutableLiveData<User?> = MutableLiveData<User?>(null)
+    private var user: MutableLiveData<Resource<User>> = MutableLiveData<Resource<User>>(Resource(data=null, loading=true))
 
     private var snapShotListener: ListenerRegistration? = null
 
@@ -71,6 +71,14 @@ class Database private constructor() {
             }
             return instance!!
         }
+    }
+
+    fun listenCoffeeTrucks(liveData: MutableLiveData<List<CoffeeTruck>>): ListenerRegistration {
+        return fireStore.collection("trucks")
+            .addSnapshotListener{ value, _ ->
+                val data = value?.toObjects(CoffeeTruck::class.java) ?: return@addSnapshotListener
+                liveData.postValue(data)
+            }
     }
 
     suspend fun saveCoffeeTruck(truck:CoffeeTruck):Void? = withContext(Dispatchers.IO) {
@@ -205,7 +213,7 @@ class Database private constructor() {
         deferredValue.await()
     }
 
-    fun getUser(): LiveData<User?> {
+    fun getUser(): LiveData<Resource<User>> {
         return user
     }
 }

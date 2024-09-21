@@ -46,6 +46,7 @@ class CoffeeTruckViewModel : ViewModel() {
                 loadingState.postValue(LoadingState.Loaded)
                 callback()
             }
+        }
     }
 
     fun addCoffeeTruck(coffeeTruckForm: CoffeeTruckCreationForm, callback: () -> Unit) {
@@ -61,11 +62,12 @@ class CoffeeTruckViewModel : ViewModel() {
             }
         }
     }
-
     override fun onCleared() {
         super.onCleared()
         Database.getInstance().stopListeningToUser()
         coffeeTrucksListenerRegistration?.remove()
     }
+
+
 }
 

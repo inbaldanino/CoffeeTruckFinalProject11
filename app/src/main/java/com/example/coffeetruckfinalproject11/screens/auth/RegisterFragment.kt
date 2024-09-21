@@ -53,8 +53,8 @@ class RegisterFragment : Fragment() {
 
         binding.btnCreateAccount.setOnClickListener{
             val fullName = binding.etName.text.toString()
-            val email = binding.etName.text.toString()
-            val password = binding.etName.text.toString()
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
 
             if(TextUtils.isEmpty(fullName)) {
                 binding.etNameLayout.error = "name must be provided"

@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.example.coffeetruckfinalproject11.R
 import com.google.android.material.textfield.TextInputEditText
 
 class UserProfileCreation : Fragment() {
@@ -52,7 +53,7 @@ class UserProfileCreation : Fragment() {
 
         // Inflate the layout for this fragment
 
-        val view = inflater.inflate(R.layout.create_user, container, false)
+        val view = inflater.inflate(R.layout.fragment_user_profile_creation, container, false)
 
         setupUI(view)
 
