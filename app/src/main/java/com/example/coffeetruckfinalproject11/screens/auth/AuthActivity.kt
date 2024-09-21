@@ -36,7 +36,6 @@ class AuthActivity : AppCompatActivity() {
             }
         }
         viewModel.exception.observe(this) { exc ->
-            Log.d("Obser", exc.message.toString())
             Snackbar.make(binding.root, exc.message.toString(), Snackbar.LENGTH_LONG).show()
 
         }
